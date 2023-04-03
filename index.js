@@ -125,6 +125,7 @@ app.put('/post', cors(), uploadMiddleware.single('file'), async (req,res) => {
 });
 
 app.get('/post', cors(), async (req,res) => {
+  res.set('Access-Control-Allow-Credentials', 'true');
   res.json(
     await Post.find()
       .populate('author', ['username'])
