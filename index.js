@@ -16,9 +16,7 @@ const secret = 'asdfe45we45w345wegw345werjktjwertkj';
 
 app.use(cors({
   origin: 'https://blog-frontend-three-gilt.vercel.app',
-  credentials: true,
-  sameSite: 'none',
-  secure: true
+  credentials: true
 }));
 app.use(express.json());
 app.use(cookieParser());
@@ -42,9 +40,7 @@ app.post('/register', async (req,res) => {
 
 app.post('/login', cors({
   origin: ['https://blog-frontend-three-gilt.vercel.app', 'https://blog-frontend-akshatpare.vercel.app'],
-  credentials: true,
-  sameSite: 'none',
-  secure: true
+  credentials: true
 }), async (req,res) => {
   const {username,password} = req.body;
   const userDoc = await User.findOne({username});
