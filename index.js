@@ -41,6 +41,7 @@ app.post('/login', async (req,res) => {
   const {username,password} = req.body;
   const userDoc = await User.findOne({username});
   const passOk = bcrypt.compareSync(password, userDoc.password);
+  res.set('Access-Control-Allow-Origin', 'https://blog-frontend-three-gilt.vercel.app');
   if (passOk) {
     // logged in
     jwt.sign({username,id:userDoc._id}, secret, {}, (err,token) => {
