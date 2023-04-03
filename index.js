@@ -61,7 +61,7 @@ app.post('/login', cors({
   } else {
     res.status(400).json('wrong credentials');
   }
-  res.set('Access-Control-Allow-Origin', req.headers.origin);
+  res.header('Access-Control-Allow-Origin', 'https://blog-frontend-three-gilt.vercel.app');
 });
 
 app.get('/profile', (req,res) => {
