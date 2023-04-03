@@ -44,8 +44,7 @@ app.post('/login', cors({
   origin: ['https://blog-frontend-three-gilt.vercel.app', 'https://blog-frontend-akshatpare.vercel.app'],
   credentials: true,
   sameSite: 'none',
-  secure: true,
-  allowedHeaders: ['Content-Type', 'Authorization']
+  secure: true
 }), async (req,res) => {
   const {username,password} = req.body;
   const userDoc = await User.findOne({username});
@@ -62,6 +61,7 @@ app.post('/login', cors({
   } else {
     res.status(400).json('wrong credentials');
   }
+  res.set('Access-Control-Allow-Origin', req.headers.origin);
 });
 
 app.get('/profile', (req,res) => {
