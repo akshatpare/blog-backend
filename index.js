@@ -44,7 +44,8 @@ app.post('/login', cors({
   origin: ['https://blog-frontend-three-gilt.vercel.app', 'https://blog-frontend-akshatpare.vercel.app'],
   credentials: true,
   sameSite: 'none',
-  secure: true
+  secure: true,
+  allowedHeaders: ['Content-Type', 'Authorization']
 }), async (req,res) => {
   const {username,password} = req.body;
   const userDoc = await User.findOne({username});
