@@ -15,7 +15,10 @@ const salt = bcrypt.genSaltSync(10);
 const secret = 'asdfe45we45w345wegw345werjktjwertkj';
 
 app.use(cors({
-  origin: 'https://blog-frontend-three-gilt.vercel.app'
+  origin: 'https://blog-frontend-three-gilt.vercel.app',
+  credentials: true,
+  sameSite: 'none',
+  secure: true
 }));
 app.use(express.json());
 app.use(cookieParser());
@@ -41,7 +44,6 @@ app.post('/login', async (req,res) => {
   const {username,password} = req.body;
   const userDoc = await User.findOne({username});
   const passOk = bcrypt.compareSync(password, userDoc.password);
-  res.set('Access-Control-Allow-Origin', 'https://blog-frontend-three-gilt.vercel.app');
   if (passOk) {
     // logged in
     jwt.sign({username,id:userDoc._id}, secret, {}, (err,token) => {
