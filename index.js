@@ -13,11 +13,8 @@ const fs = require('fs');
 
 const salt = bcrypt.genSaltSync(10);
 const secret = 'asdfe45we45w345wegw345werjktjwertkj';
-app.options('*', cors())
-app.use(cors({
-  origin : "https://blog-frontend-gbpck1hix-akshatpare.vercel.app",
-  credentials: true,
-}));
+
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'));
