@@ -14,9 +14,6 @@ const fs = require('fs');
 const salt = bcrypt.genSaltSync(10);
 const secret = 'asdfe45we45w345wegw345werjktjwertkj';
 
-app.set("trust proxy", 1); // trust first proxy
-sessionConfig.cookie.secure = true; // serve secure cookies
-
 app.use(cors({
   origin: 'https://blog-frontend-three-gilt.vercel.app',
   credentials: true,
