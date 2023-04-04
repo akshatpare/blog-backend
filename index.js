@@ -16,7 +16,9 @@ const secret = 'asdfe45we45w345wegw345werjktjwertkj';
 
 app.use(cors({
   origin: 'https://blog-frontend-three-gilt.vercel.app',
-  credentials: true
+  credentials: true,
+  preflightContinue: true,
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 }));
 app.use(express.json());
 app.use(cookieParser());
@@ -38,10 +40,7 @@ app.post('/register', async (req,res) => {
   }
 });
 
-app.post('/login', cors({
-  origin: ['https://blog-frontend-three-gilt.vercel.app', 'https://blog-frontend-akshatpare.vercel.app'],
-  credentials: true
-}), async (req,res) => {
+app.post('/login', async (req,res) => {
   const {username,password} = req.body;
   const userDoc = await User.findOne({username});
   const passOk = bcrypt.compareSync(password, userDoc.password);
@@ -57,7 +56,6 @@ app.post('/login', cors({
   } else {
     res.status(400).json('wrong credentials');
   }
-  res.header('Access-Control-Allow-Origin', 'https://blog-frontend-three-gilt.vercel.app');
 });
 
 app.get('/profile', (req,res) => {
