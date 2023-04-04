@@ -13,6 +13,16 @@ const fs = require('fs');
 
 const salt = bcrypt.genSaltSync(10);
 const secret = 'asdfe45we45w345wegw345werjktjwertkj';
+const session = require("express-session");
+
+const sessionConfig = {
+  cookie: {
+    sameSite: "none",
+  },
+};
+
+app.set("trust proxy", 1); // trust first proxy
+sessionConfig.cookie.secure = true; // serve secure cookies
 
 app.use(cors({
   origin: 'https://blog-frontend-three-gilt.vercel.app',
@@ -20,6 +30,7 @@ app.use(cors({
   preflightContinue: true,
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 }));
+app.use(session(sessionConfig));
 app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'));
